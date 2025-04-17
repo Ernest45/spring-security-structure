@@ -16,11 +16,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain FilterChain(HttpSecurity http) throws Exception {
 
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/user").permitAll());
+
         return http.build();
     }
 
     @Bean
     public SecurityFilterChain FilterChain1(HttpSecurity http) throws Exception {
+
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/admin").permitAll());
+
 
         return http.build();
     }
