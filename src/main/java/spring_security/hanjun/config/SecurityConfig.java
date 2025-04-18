@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.ArrayList;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -15,6 +17,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain FilterChain(HttpSecurity http) throws Exception {
+
+        http
+                .securityMatchers((auth) -> auth.requestMatchers("/user"));
+
 
         http
                 .authorizeHttpRequests((auth) -> auth
@@ -27,10 +33,14 @@ public class SecurityConfig {
     public SecurityFilterChain FilterChain1(HttpSecurity http) throws Exception {
 
         http
+                .securityMatchers((auth) -> auth.requestMatchers("/admin"));
+
+        http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin").permitAll());
 
 
         return http.build();
+
     }
 }
